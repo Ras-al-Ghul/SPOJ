@@ -1,3 +1,8 @@
+// first problem, simple brute force
+// scanf, printf is faster than cin, cout
+// lookout for memory optimization, not just for runtime
+// scanf uses & for input
+
 #include <iostream>
 
 using namespace std;

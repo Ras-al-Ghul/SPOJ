@@ -1,3 +1,22 @@
+// the goal was to sort Anudeep's SPOJ order, there might be some mystery
+// thought I'd use Python for this, but using C++ actually turned out to be an amazing learning experience
+
+// read from getline needs stringstream (sstream) and string to which it will read to, also it can use separator to separate things in the stringstream
+// better to use typedef for repeated stuff
+// used vector of tuples and map of <tuple, string>
+
+// outer variable with same variable name as inner is scoped out and cannot be accessed even using namespace
+
+// push_back for vectors, insert for map
+// create pair for inserting into map
+
+// iterator of required type
+
+// access elements of pair using ->
+// access elements of tuple using get<i>(tuple)
+
+// best part was that the map automatically sorted based on the key - which was a tuple - precedence left to right
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -7,23 +26,14 @@
 
 using namespace std;
 
-int stringParse(string line, string& date){
-	date = "hello";
-
-	return 0;
-}
-
 int main(){
 
 	string line;
-	vector< tuple<int,int,int,int,int,int> > numbers;
+	typedef tuple<int,int,int,int,int,int> hexint;
 
-	map<tuple<int,int,int,int,int,int>, string> mapping;
-	// problems.insert(pair<string,string>("hi", "hello"));
+	vector< hexint > numbers;
 
-	// for(map<string, string>::iterator it = problems.begin(); it != problems.end(); ++it){
-	// 	cout<<it->first;
-	// }
+	map< hexint , string> mapping;
 
 	string data;
 	while(getline(cin, line)){
@@ -31,7 +41,7 @@ int main(){
 		string data;
 		int counter = 0;
 		int year, month, date;
-		tuple<int,int,int,int,int,int> sortbase;
+		hexint sortbase;
 		while(getline(iss, data, ' ')){
 			if(counter == 0){
 				stringstream dates(data);
@@ -65,17 +75,16 @@ int main(){
 					}
 					innercount++;
 				}
-				sortbase = tuple<int,int,int,int,int,int>
-								(year,month,date,hour,minute,second);
+				sortbase = hexint(year,month,date,hour,minute,second);
 				numbers.push_back(sortbase);
 			}
 			else{
-				mapping.insert(pair<tuple<int,int,int,int,int,int>, string>(sortbase, data));
+				mapping.insert(pair<hexint, string>(sortbase, data));
 			}
 			counter++;
 		}
 	}
-	for(map<tuple<int,int,int,int,int,int>, string>::iterator it = mapping.begin();
+	for(map<hexint, string>::iterator it = mapping.begin();
 		it != mapping.end(); ++it){
 		cout<<get<0>(it->first)<<"-"<<get<1>(it->first)<<"-"<<get<2>(it->first)
 		<<" "<<get<3>(it->first)<<":"<<get<4>(it->first)<<":"<<get<5>(it->first)
