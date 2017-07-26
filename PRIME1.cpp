@@ -7,6 +7,18 @@
 // prime numbers sqrt bounds
 // manage indexes properly, here lower bound could be 1 too - which is not a prime
 
+// c++ can only fill array with {0}, otherwise have to use other syntax - if to be filled by other values
+
+// seems that associative array (dict) is faster in python than large bool array
+
+// time complexity - largest number in first sieve ~ 32000
+// for all primes in first sieve, we eliminate numbers in the second sieve
+// max numbers in the second sieve = (upper - lower) = 100001
+// so time complexity - O(100001 * ( (1/2) + (1/3).. + (1/32000) ) ) ~ O(260000)
+
+// what i've done - start by first multiple of prime > lower bound
+// this is called segmented sieve
+
 #include <iostream>
 #include <vector>
 #include <set>

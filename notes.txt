@@ -1,0 +1,10 @@
+ajay somani's notes on TC
+Modular exponentiation and modular multiplication
+Concept is quite interesting
+modexp - multiply the base by itself, then multiply earlier product with itself, etc. if odd, multiply by base.
+modmul - multiply by two, then multiply earlier product with itself
+if odd, add in final step.
+problems may involve matrix exponentiation - do it on matrix ops now
+
+Some facts on euler's totient function from TC tutorials again
+For prime p, for phi(a*p) or phi(a^p), etc.
