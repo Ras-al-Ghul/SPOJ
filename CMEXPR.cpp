@@ -1,11 +1,28 @@
+// feel proud after doing this
+
 // don't rely on segfaults for out of bounds
 // in case of char strings accessing out of bounds index didn't give segfault
 // had to manually ensure that index is not out of bounds
 
+// use stacks for detecting opening and closing of braces, other methods are inefficient - refer openingbracecount, closingbracecount below
+
+// edge cases are really tricky
+// sometimes test cases may not cover everything
+// time complexity of this algo seems good
+
+// the approach was to consider each brace pair at a time
+// for each brace pair, consider a list of curoperators (bear in mind that there can be more than one)
+// for each brace pair, find the prevoperator and nextoperator if it exists
+// check if the conditions are satisfied for each element in the list of curoperators
+// only then remove the braces
+
+// manage memory
+
 #include <iostream>
 #include <cstring>
+#include <stack>
 
-#define MAXSIZE 251
+#define MAXSIZE 500
 
 using namespace std;
 
@@ -25,111 +42,134 @@ int main(){
 			if(expr[i]=='('){
 				listofbraces[openingbracecount] = new int[2];
 				listofbraces[openingbracecount][0] = i;
+				listofbraces[openingbracecount][1] = -1;
 				closingbracecount = openingbracecount;
 				openingbracecount++;
 			}
 			else if(expr[i]==')'){
-				listofbraces[closingbracecount][1] = i;
-				closingbracecount--;
+				while(true){
+					if(listofbraces[closingbracecount][1] == -1){
+						listofbraces[closingbracecount][1] = i;
+						closingbracecount--;		
+						break;
+					}
+					closingbracecount--;
+				}
 			}
 		}
-		// for(int i=0; i<openingbracecount; i++)
-		// 	cout<<listofbraces[i][0]<<" "<<listofbraces[i][1]<<endl;
-		// break;
+
 		for(int i=openingbracecount-1; i>=0; i--){
-			char curoperator = ' ';
-			if(expr[listofbraces[i][0]+1] == '('){
-				// printf("YO\n");
-				for(int j=listofbraces[i+1][1]+1; j<listofbraces[i][1]-1; j++){
-					if(expr[j]=='+' || expr[j]=='-' || expr[j]=='*' || expr[j]=='/'){
-						curoperator = expr[j];
-						break;
+			
+			char *curoperatorlist[int(MAXSIZE/2)];
+			int curoperatorlistcount = 0;
+
+			stack<char> bracesstack; 
+			for(int j=listofbraces[i][0]+1; j<listofbraces[i][1]-1; j++){
+				if(expr[j]=='('){
+					bracesstack.push(expr[j]);
+				}
+				else if(expr[j]==')'){
+					bracesstack.pop();
+				}
+				else if(expr[j]=='+' or expr[j]=='-' or expr[j]=='*' or expr[j]=='/'){
+					if(bracesstack.empty()){
+						curoperatorlist[curoperatorlistcount] = new char[2];
+						curoperatorlist[curoperatorlistcount][0] = expr[j];
+						curoperatorlist[curoperatorlistcount][1] = '0';
+						curoperatorlistcount++;
 					}
 				}
 			}
-			else{
-				for(int j=listofbraces[i][0]+1; j<listofbraces[i][1]-1; j++){
-					if(expr[j]=='+' || expr[j]=='-' || expr[j]=='*' || expr[j]=='/'){
-						curoperator = expr[j];
-						break;
-					}
-				}
-			}
-			if(curoperator != ' '){
+
+			if(curoperatorlistcount != 0){
 				// printf("%c\n", curoperator);
 				if(!(listofbraces[i][0] == 0 and (listofbraces[i][1] == strlen(expr) - 1))){
-					char previousoperator = ' ', nextoperator = ' ';
-					if((listofbraces[i][0]-1 >=0) and (expr[listofbraces[i][0]-1] != '(')){
-						previousoperator = expr[listofbraces[i][0] - 1];
-					}
-					if((listofbraces[i][1]+1 <strlen(expr)) and (expr[listofbraces[i][1]+1] != ')')){
-						nextoperator = expr[listofbraces[i][1] + 1];
-					}
-					// printf("prev %c next %c\n", previousoperator, nextoperator);
-					bool flag = false;
-					if(previousoperator == ' ' and nextoperator != ' '){
-						switch(curoperator){
-							case '+':
-								if(nextoperator == '+' or nextoperator == '-')
-									flag = true;
-								break;
-							case '-':
-								if(nextoperator == '-' or nextoperator == '+')
-									flag = true;
-								break;
-							case '*':
-								flag = true;
-								break;
-							case '/':
-								flag = true;
-								break;
+
+					for(int j=0; j<curoperatorlistcount; j++){
+						char curoperator = curoperatorlist[j][0];
+						char previousoperator = ' ', nextoperator = ' ';
+						if((listofbraces[i][0]-1) >= 0){
+							if(expr[listofbraces[i][0]-1] != '(')
+								previousoperator = expr[listofbraces[i][0] - 1];	
 						}
-					}
-					else if(previousoperator != ' ' and nextoperator == ' '){
-						switch(curoperator){
-							case '+':
-								if(previousoperator == '+')
-									flag = true;
-								break;
-							case '-':
-								if(previousoperator == '+')
-									flag = true;
-								break;
-							case '*':
-								if(previousoperator != '/')
-									flag = true;
-								break;
-							case '/':
-								if(previousoperator != '/')
-									flag = true;
-								break;
-						}	
-					}
-					else if(previousoperator != ' ' and nextoperator != ' '){
-						switch(curoperator){
-							case '+':
-								if(nextoperator == '+' or nextoperator == '-')
+						if((listofbraces[i][1]+1) < strlen(expr)){
+							if(expr[listofbraces[i][1]+1] != ')')
+								nextoperator = expr[listofbraces[i][1] + 1];
+						}
+						
+						if(previousoperator == ' ' and nextoperator != ' '){
+							switch(curoperator){
+								case '+':
+									if(nextoperator == '+' or nextoperator == '-')
+										curoperatorlist[j][1] = '1';
+									break;
+								case '-':
+									if(nextoperator == '-' or nextoperator == '+')
+										curoperatorlist[j][1] = '1';
+									break;
+								case '*':
+									curoperatorlist[j][1] = '1';
+									break;
+								case '/':
+									curoperatorlist[j][1] = '1';
+									break;
+							}
+						}
+						else if(previousoperator != ' ' and nextoperator == ' '){
+							switch(curoperator){
+								case '+':
 									if(previousoperator == '+')
-										flag = true;
-								break;
-							case '-':
-								if(nextoperator == '-' or nextoperator == '+')
-									if(previousoperator == '+'){
-										flag = true;
-									}
-								break;
-							case '*':
-								if(previousoperator != '/')
-									flag = true;
-								break;
-							case '/':
-								if(previousoperator != '/')
-									flag = true;
-								break;
+										curoperatorlist[j][1] = '1';
+									break;
+								case '-':
+									if(previousoperator == '+')
+										curoperatorlist[j][1] = '1';
+									break;
+								case '*':
+									if(previousoperator != '/')
+										curoperatorlist[j][1] = '1';
+									break;
+								case '/':
+									if(previousoperator != '/')
+										curoperatorlist[j][1] = '1';
+									break;
+							}	
 						}
+						else if(previousoperator != ' ' and nextoperator != ' '){
+							switch(curoperator){
+								case '+':
+									if(nextoperator == '+' or nextoperator == '-')
+										if(previousoperator == '+')
+											curoperatorlist[j][1] = '1';
+									break;
+								case '-':
+									if(nextoperator == '-' or nextoperator == '+')
+										if(previousoperator == '+'){
+											curoperatorlist[j][1] = '1';
+										}
+									break;
+								case '*':
+									if(previousoperator != '/')
+										curoperatorlist[j][1] = '1';
+									break;
+								case '/':
+									if(previousoperator != '/')
+										curoperatorlist[j][1] = '1';
+									break;
+							}
+						}
+						else{
+							curoperatorlist[j][1] = '1';
+						}
+
 					}
-					else{
-						flag = true;
+
+					bool flag = true;
+					for(int j=0; j<curoperatorlistcount; j++){
+						if(curoperatorlist[j][1] == '0'){
+							flag = false;
+							break;
+						}
 					}
 					if(flag == true){
 						expr[listofbraces[i][0]] = '0';
@@ -146,12 +186,10 @@ int main(){
 				expr[listofbraces[i][1]] = '0';
 			}
 
-			// for(int i=0; i<strlen(expr); i++){
-			// 	printf("%c", expr[i]);
-			// }
-			// printf("\n");
+			for(int j=0; j<curoperatorlistcount; j++){
+				delete[] curoperatorlist[j];
+			}
 		}
-		// break;
 		for(int i=0; i<strlen(expr); i++){
 			if(expr[i] != '0')
 				printf("%c", expr[i]);
