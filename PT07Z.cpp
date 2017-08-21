@@ -2,6 +2,11 @@
 
 // taught me that there can be so many edge cases that you haven't thought about
 
+// the main fact in this problem is that the longest depth path from root
+// will necessarily be in the solution - it is the lower bound
+// so the approach is to go from this longest depth leaf to
+// all other leaves and check longest path
+
 // two times dfs
 // second time with the deepest node
 // second time max depth is the longest path
