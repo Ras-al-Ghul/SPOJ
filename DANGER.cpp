@@ -1,5 +1,6 @@
 // simple identify the pattern kind of problem
-// go to the nearest two's power and do line number 37
+// go to the nearest two's power and do line number 38
+// to get to nearest two power, instead of incrementing two's powers, better use log - one step
 // pattern: 1-1 2-1 3-3 4-1 5-3 6-5 7-7
 // 8-1 9-3 10-5 11-7 12-9 13-11 14-13 15-15 16-1..
 
