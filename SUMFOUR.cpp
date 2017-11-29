@@ -1,5 +1,6 @@
 // Read about two-pointer algorithm
 // <https://tp-iiita.quora.com/The-Two-Pointer-Algorithm>
+// Can use in sorted contiguous arrays, sets, sequences (which need not be contiguous)
 
 // One approach is using below
 // Lookup is almost constant but construction takes time
