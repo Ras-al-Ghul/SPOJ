@@ -8,3 +8,15 @@ problems may involve matrix exponentiation - do it on matrix ops now
 
 Some facts on euler's totient function from TC tutorials again
 For prime p, for phi(a*p) or phi(a^p), etc.
+
+1 TEST - Test
+2 PRIME1 - Primality square root bound - one of the factors to be <= (sqrt N) - two sieves - one up until sqrt(largest number), use this to eliminate numbers within given range which is second sieve - segmented sieve
+3 ONP - Reverse Polish Notation - look at complete input file - don't assume things
+4 FCTRL - Print trailing zeroes of factorial of number - have to count even numbers and number of multiples of 'powers of 5' - powers of 5 because, eg: 25 - 5*5, one extra 5 - product of these give rise to zeros - since in a given range, number of even numbers is greater than number of 5's, counting the number of 5's is enough - have to look at optimizing logic like that to not get TLE
+5 FCTRL2 - Big Integer problem - 100! - the number of digits in a number n is log(n) - number of digits in n! is log(n!) = log(n) + log(n-1) + ... - approximation of factorials are calculated using Stirling's approximation which is not needed here
+6 CMPLS - Lagrangian interpolation, Lagrangian polynomials - complete the sequence - method of successive differences, forward differences table this should come to mind when sequence is continuous i.e. for f(i), f(i+1), f(i+2), etc. given in order cannot use if f(i), f(i+5), f(i+x), etc. are given
+
+68 ROADNET - Shortest path - Djikstra's algo - O(N^3) method maybe faster. Update of hops is critical. Djikstra's - have to consider entire graph from each vertex do a Djikstra run - you'll get shortest paths to all vertices - if the shortest path is reached in 0 (source vertex itself) or 1 hops, it means you're using direct path
+69 POLEVAL - Evaluate a polynomial at a point - Use Horner's method. Synthetic division, Polynomial Reminder Theorem
+70 DANGER - Josephus problem - have to find nearest two's power - log base 2 of a number is the best way - write down sequence for few iterations, identify pattern kind of problem
+71 SUMFOUR - a+b+c+d = 0, 4 lists given. For all pairs a,b check if -(a+b) exists in unordered_map (with reserve keyword) which contains all pairs (c+d)

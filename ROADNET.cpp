@@ -65,12 +65,19 @@ int main(){
 				for(temp = 0;temp<vertices;++temp){
 					// you've to do <= because 
 					// towns A and B are neighbouring towns if there is NO TOWN C such that the length of the shortest way
-					// from A to B equals the sum of the lengths of the shortest ways from A to C and C to B
+					// from A to B 'equals' the sum of the lengths of the shortest ways from A to C and C to B
+					// even if equality holds, then it is still shorter path kind of idea
+					// plain Djikstra is <
+
+					// also Djikstra's updates only for neighbours, here you're doing it for all nodes
+
 					// since you've made it <= here for dist[k][0]+arr[k][temp] <= dist[temp][0]
 					// therefore you've to do dist[i][1] < 2 and not dist[i][1] != 2 in the print
 
 					// arr[k][temp] and dist[k][0] != INT_MAX is important, else may lead to overflow
-					if(!visited[temp] and arr[k][temp] and dist[k][0] != INT_MAX and dist[k][0]+arr[k][temp] <= dist[temp][0]){
+					// the above comment doesn't seem to hold as in the first iteration of i, the source is visited
+					// this will change all dist[temp][0] to something less than INT_MAX, hence no overflow
+					if(!visited[temp] /*and arr[k][temp] and dist[k][0] != INT_MAX*/ and dist[k][0]+arr[k][temp] <= dist[temp][0]){
 						dist[temp][0] = dist[k][0] + arr[k][temp];
 						// increment hops carefully
 						dist[temp][1] = dist[k][1] + 1;

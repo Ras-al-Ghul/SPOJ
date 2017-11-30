@@ -1,6 +1,8 @@
 // judging the difficulty level of a problem can be tough
 // in this case I looked at steepest descent, conjugate gradient, etc.
 // even Cramer's rule
+// <https://en.wikipedia.org/wiki/Lagrange_polynomial>
+
 // this was because the language in the problem was slightly deceiving
 // for instance it said that the polynomial coefficients could be fractions, etc.
 // also nowhere was it mentioned that the sequence was non decreasing
