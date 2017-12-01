@@ -15,6 +15,31 @@ For prime p, for phi(a*p) or phi(a^p), etc.
 4 FCTRL - Print trailing zeroes of factorial of number - have to count even numbers and number of multiples of 'powers of 5' - powers of 5 because, eg: 25 - 5*5, one extra 5 - product of these give rise to zeros - since in a given range, number of even numbers is greater than number of 5's, counting the number of 5's is enough - have to look at optimizing logic like that to not get TLE
 5 FCTRL2 - Big Integer problem - 100! - the number of digits in a number n is log(n) - number of digits in n! is log(n!) = log(n) + log(n-1) + ... - approximation of factorials are calculated using Stirling's approximation which is not needed here
 6 CMPLS - Lagrangian interpolation, Lagrangian polynomials - complete the sequence - method of successive differences, forward differences table this should come to mind when sequence is continuous i.e. for f(i), f(i+1), f(i+2), etc. given in order cannot use if f(i), f(i+5), f(i+x), etc. are given
+7 ADDREV - <algorithm> has reverse()
+8 TOANDFRO - string ordering and pattern
+9 CMEXPR - remove unneeded parantheses - accessing array elements out of bounds need not give segfault - may give random values - use stacks for detecting open brace, close brace - check all input test cases and even more because they might not cover everything - the approach was to consider each brace pair at a time for each brace pair, consider a list of curoperators (bear in mind that there can be more than one) for each brace pair, find the prevoperator and nextoperator if it exists check if the conditions are satisfied for each element in the list of curoperators only then remove the braces - can finish in one pass
+10 JULKA - big numbers - take care of variables which are being reused
+11 NSTEPS - pattern identification
+12 SAMER08F - count squares within squares - sometimes formula might work better than loops - derive formula from loops if possible - if time limit is strict it will be needed
+13 FASHION - sort vs. using something like heap - which is better to use - see number of operations and complexity - number of insertions, number of elements, how they will be used, etc.
+14 CANDY - nothing touch
+15 CANTON - pattern identification
+16 COINS - easy dp - find optimal substructure - try catch for bad alloc in dict for dp - if it is full, can't add to dict, have to calculate - also maintain global dict if same dict can be reused for different test cases
+17 LASTDIG - last digit of a^b, hence a^b mod 10 which is Modular Exponentiation
+18 HANGOVER - floating ops - don't approximate unecessarily - float = 1.0f - look at this problem for floating point comparators
+19 PERMUT2 - forgot to use delete[], cost 1 SIGSEGV - SIGABRT caused by problems with memory allocation
+20 CANDY3 - simple problems may have huge test cases
+21 EIGHTS - find kth number whose cube ends with 888 - find pattern, turns out to be AP - I didn't spot that - cannot increment counter and keep count - will be too slow - hence set digits of answer in an array, directly based on known pattern
+22 AE00 - how many rectangles can be formed with unit squares - try to simplify the math even though it may take time this will lead to faster solutions - underflow, subtraction, unsigned numbers
+23 ABSYS - string processing
+24 AP2 - see if some values can go -ve while using unsigned numbers - d in AP might be negative even if all terms in AP are positive
+25 ACODE - single scan DP - number of ways in which string can be decoded - I was considering c[0] <= 2 and c[1] <= 6 what I wanted was c[01] <= 26 for what I was doing, 17 doesn't pass - instead of recursion with function calls for dp, better is single scan left to right dp - look for such methods in string questions - d[i] = d[i-1], if d[i] and d[i-1] < 26, then, d[i] += d[i-2] because d[i-1]d[i] can be read together or one by one - string.erase(index, num of characters to erase)
+26 ACPC10A - find if AP or GP, give next number in sequence - if problem is easy, then it is about handling all edge cases
+27 STPAR - stacks, parade vehicle ordering
+28 BISHOPS - number of non-threatening bishops on 'large' chessboard - identify pattern problem
+29 ARMY - Godzilla vs. Mecha - min_heap using pq - priority_queue from <queue>
+30 TRICOUNT - Triangle within triangle - count them - oeis.org - enter few terms of series, get formula - which is easier than deriving formula yourself
+31 STAMPS - priority_queue - look at how to implement both min_heap and max_heap
 
 68 ROADNET - Shortest path - Djikstra's algo - O(N^3) method maybe faster. Update of hops is critical. Djikstra's - have to consider entire graph from each vertex do a Djikstra run - you'll get shortest paths to all vertices - if the shortest path is reached in 0 (source vertex itself) or 1 hops, it means you're using direct path
 69 POLEVAL - Evaluate a polynomial at a point - Use Horner's method. Synthetic division, Polynomial Reminder Theorem

@@ -1,5 +1,5 @@
 // ui(num+1) caused SIGABRT
-// forgot to use delete[], cause 1 SIGSEGV
+// forgot to use delete[], caused 1 SIGSEGV
 
 #include <iostream>
 

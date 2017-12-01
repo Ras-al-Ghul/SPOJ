@@ -1,4 +1,4 @@
-// bitops may be faster, don;t know if it is even feasible though
+// bitops may be faster, don't know if it is even feasible though
 
 #include <iostream>
 

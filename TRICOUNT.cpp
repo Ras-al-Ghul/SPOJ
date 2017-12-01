@@ -4,7 +4,7 @@
 // oeis.org is awesome
 // look for first few terms, enter the series, get the formula
 
-// special series some
+// special series sum
 
 // <https://math.stackexchange.com/questions/203873/how-many-triangles>
 

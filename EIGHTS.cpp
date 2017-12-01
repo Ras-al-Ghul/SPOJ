@@ -33,7 +33,6 @@ int main(){
 		for(int i=0; i<MAXSIZE-3; i++){
 			arr[i] = 0;
 		}
-		bool flag = false;
 		toggle = (number+3)%4;
 		ull div_four;
 		if(toggle == 3)
