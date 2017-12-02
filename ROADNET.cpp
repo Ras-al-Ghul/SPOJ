@@ -69,7 +69,7 @@ int main(){
 					// even if equality holds, then it is still shorter path kind of idea
 					// plain Djikstra is <
 
-					// also Djikstra's updates only for neighbours, here you're doing it for all nodes
+					// also Djikstra's updates only for neighbours, here you're doing it for all nodes because you don't know what the neighbours are
 
 					// since you've made it <= here for dist[k][0]+arr[k][temp] <= dist[temp][0]
 					// therefore you've to do dist[i][1] < 2 and not dist[i][1] != 2 in the print
