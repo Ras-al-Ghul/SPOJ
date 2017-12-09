@@ -91,3 +91,6 @@ For prime p, for phi(a*p) or phi(a^p), etc.
 80 MFLAR10 - tell if tautogram or not - sentences with all words beginning with same case-insensitive letter
 81 HPYNOS - sum of squares of digits - Happy Number if it sums to 1 - if it repeats in cycle, then not - upper bounding is important
 82 AIBOHP - DP - find least number of characters to insert to make input string a palindrome - fill along diagonals, base case - 1 char at a time, 2 chars at a time - bottom up DP - two cases - depends on (i+1,column-1) or min((i,col-1),(i+1,col)) - first case if first and last equal, second if first != last - notice that proper separation - disjoint union ensures that locks are not needed - look at cpp for more details - alt is to use {strlen - LCS(str, revstr)} formula
+83 AMR10G - find minimum difference between k heights out of given n - simple sort and maintain best so far - std::sort is quicker than qsort
+84 HASHIT - straightforward hashing
+85 FAVDICE - Coupon collector problem - remember approach - math
