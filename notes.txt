@@ -94,3 +94,6 @@ For prime p, for phi(a*p) or phi(a^p), etc.
 83 AMR10G - find minimum difference between k heights out of given n - simple sort and maintain best so far - std::sort is quicker than qsort
 84 HASHIT - straightforward hashing
 85 FAVDICE - Coupon collector problem - remember approach - math
+86 ACS - array operations - do row/column interchange and querying in O(n) time and complete array won't fit in memory - use arr[nrows] and arc[ncols] to keep track - you will need two more arrays to make everything O(1)
+87 WILLITST - workout pattern till num=10 and then do - if power of 2, then stops, else no
+88 SHPATH - textbook Djikstra - stop as soon as you hit destination node - again no need to update values in heap, just keep adding
