@@ -97,3 +97,10 @@ For prime p, for phi(a*p) or phi(a^p), etc.
 86 ACS - array operations - do row/column interchange and querying in O(n) time and complete array won't fit in memory - use arr[nrows] and arc[ncols] to keep track - you will need two more arrays to make everything O(1)
 87 WILLITST - workout pattern till num=10 and then do - if power of 2, then stops, else no
 88 SHPATH - textbook Djikstra - stop as soon as you hit destination node - again no need to update values in heap, just keep adding
+89 SHOP - find shortest path in grid - modified Djikstra - no need to try to construct graph, instead directly use Djikstra on vertices - can also use BFS - in Djikstra's, see if you can stop after reaching destination vertex
+90 ETF - Euler Totient Function - direct formula uses float ops, hence use modified method - <http://www.geeksforgeeks.org/eulers-totient-function/>
+91 MRECAMAN - brute force sequence
+92 ASSIST - find n th lucky number - like Josephus problem - sieve used for other purposes
+93 TRGRID - traversing a grid - generating and classifying into cases is the key - reduce the grid to a small size after full traversals - in reduced grid size, dimensions can be (1,1), (1,2), (2,1), (2,2), ((1,2),other), (other,(1,2)) - now handle case by case - <http://xoptutorials.com/index.php/2017/01/01/spojtrgrid/>
+94 ANARC05B - find maximum sum in two strictly increasing strings - can switch between strings at intersections (indices with same number) - linear DP - O(n+m) solution
+95 ANARC09A - match the braces - DP was very slow, but perfectly working - had to use stack - couldn't really use 'only even number of {}'s' condition - other interesting O(n^2) DP solution <https://abitofcs.blogspot.in/2014/10/a-bit-of-string-balancing-spoj-anarc09a.html> - If you can't solve with grid method, try Mimino's classical approach and handle all cases
