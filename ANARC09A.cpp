@@ -2,6 +2,9 @@
 // had to use stack - couldn't really use - only even number of {}'s condition
 // Other interesting O(n^2) DP solution <https://abitofcs.blogspot.in/2014/10/a-bit-of-string-balancing-spoj-anarc09a.html>
 // If you can't solve with grid method, try Mimino's classical approach and handle all cases
+// main thing is to recognize DP state
+// don't get caught up with the idea that two indices of string is the only possible state
+// in above link it was (index, number of open braces) - then look at current index and see what cases are possible
 
 #include <iostream>
 #include <string>
