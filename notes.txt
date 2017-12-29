@@ -150,3 +150,7 @@ For prime p, for phi(a*p) or phi(a^p), etc.
 139 MISERMAN - line by line DP
 140 DYZIO - count the number of cuts which have to be made in order to get to the shortest piece - 1 - cut (recurse) left and right, 0 - return - it is not depth of recursions, but it is number of cuts - hence it maybe greater than depth of recursions, if smallest piece is reached on the righter side - was slightly tough to understand the question
 141 CNEASY - Output an integer - the minimum number of seconds that Christy needs to take all landmarks' photos - find max dist after sorting - take care of 360 - a[n-1] + a[0] also
+142 GEOPROB - bigint geometry problem - a = (c-b)+(c-d) - enough if ratio remains the same I guess - <https://apps.topcoder.com/forums/;jsessionid=5FBC9D76176657EA4B331B6CE3FA3538?module=Thread&threadID=632397&start=0&mc=3#1061249>
+143 GUESSTHE - given a sequence of 'YYNYY', etc., output minimum positive integer that satisfies all the clues, or -1 if there is no such number (i.e. some clue is violated or contradictory) - where each index indicates divisibility by that number - Y at 2 - divisibility by 2 - LCM problem - instead of the below for 'Y' case, we can do it together at the end - find lcm of all 'Y''s and later, together check if 'N''s divide it
+144 BOMARBLE - number of marbles required to form a pentagon - OEIS saved the day again - they say that it's an easy patter/recurrence to spot - DP
+145 SCAVHUNT - print route in correct order - STL maps
