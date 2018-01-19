@@ -1,0 +1,22 @@
+/(&&(%&%&$%&$%a BULLSHIT#include BULLSHIT
+#include
+BULLSHIT    BULLSHIT
+BULLSHIT 
+#include
+#include
+
+using namespace std;
+const int tam = 1000;
+vector np ;
+vector pp(tam);
+void primos(  ){
+	int c = 0;
+	pp[0] = pp[1] = 1;
+	for( long long i = 2 ; i < tam ; i++ ){
+		if( pp[i] == 0){
+		//	cout< cantidad;
+	vector pa;
+	primos();
+	int tg = 0,c = 0;
+	string let;
+	string pp = "BULLSHIT" ;

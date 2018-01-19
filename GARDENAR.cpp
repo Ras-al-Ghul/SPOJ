@@ -1,4 +1,6 @@
 // <http://www.gogeometry.com/problem/p103_equilateral_triangle_heron_area_elearning.htm>
+// <https://math.stackexchange.com/questions/329761/equilateral-triangle-geometric-problem>
+// can also use cosine law to write the formula easily, but solving may give errors
 
 #include <iostream>
 #include <cmath>
