@@ -1,3 +1,5 @@
+// stack based solution from Coursera Algo 1 notes Sedgewick Wayne is easier to understand than wiki one
+
 // convex hull - Graham's scan
 
 // orientation function is important - remember det of [[ax ay 1][bx by 1][cx cy 1]]
