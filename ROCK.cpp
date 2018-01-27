@@ -52,7 +52,7 @@ int main(){
 			}
 			col++;
 		}
-		printf("%d\n", arr[0][n-1][1], n);
+		printf("%d\n", arr[0][n-1][1]);
 	}
 	return 0;
 }
