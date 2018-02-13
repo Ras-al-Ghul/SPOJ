@@ -13,6 +13,28 @@
 // <https://math.stackexchange.com/questions/764727/concrete-fft-polynomial-multiplication-example>
 // <https://gist.github.com/ir5/854921> - FFT based implementation
 
+// Finally, the easiest to understand:
+// <http://codeforces.com/blog/entry/43499>
+// <http://codeforces.com/blog/entry/48798>
+
+// represent integers as polynomials of suitable base
+// 123 = x^2 + 2x + 3 if base 10, some bases you will get floating point errors,
+// some bases WA, base 10^5 with long double may work - see top coder
+// FFT method:
+// two reprsentations of polynomials I) coefficients of power II) point value
+// need n+1 points at which polynomial is evaulated to have unique representation for
+// polynomial of degree n - the points are nth roots of unity
+// If A(x) is degree m, B(x) is degree n, need mn points
+// 1) Construct point value form of A(x) and B(x) - takes O(n^2), but using FFT,
+// can be done in O(nlogn) - T(n) = 2*T(n/2) + O(2*n), where O(2n) is for combining
+// the results A = Aeven + Aodd - possible because of property of roots of unity
+// take motivation from Karatsuba - 10^n/2a + b style
+// In FFT, you basically evaluate at half of the points because of nth roots of unity
+// 2) C(x) = A(x) * B(x) - O(n) - simple convolution
+// 3) IFFT - again use roots of unity concept and do it in O(nlogn) instead of O(n^2)
+// Also, can use NTT, Number Theoretic Transform to avoid using precision issues,
+// everything will be integers, but lot of %mod operations, hence slows things down
+
 #include <iostream>
 #include <vector>
 #include <fstream>
