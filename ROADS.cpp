@@ -1,6 +1,6 @@
 // DP approach is quite similar to FISHER
 // dp[n][cost] - i,j - 'from source' to node i, min dist path possible within j cost
-// cost j-1 to be filled before j for all i
+// cost j-i to be filled before j for all i
 
 #include <iostream>
 #include <vector>
