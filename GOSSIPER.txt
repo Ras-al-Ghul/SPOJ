@@ -1,0 +1,17 @@
+3 3
+Alice
+Bob
+Cindy
+Alice Bob
+Bob Cindy
+Cindy Alice
+
+4 4
+Kirk
+Lucy
+Mike
+Nancy
+Kirk Lucy
+Lucy Mike
+Mike Nancy
+Nancy Lucy
