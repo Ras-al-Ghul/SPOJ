@@ -124,6 +124,13 @@ ll prefixsum(ll n, ll a[]){
     return sum;
 }
 
+// some general notes about the Fenwick Tree here
+// index is from 0 to n-1
+// so if you update(0,val), 0th index gets updated by val, max is n-1th index
+// also update operation updates by val does +val or -val to existing value at that point
+// prefixsum(x) returns sum [0,x-1]
+// so sum of whole 0 to n-1, you do prefixsum(n)
+
 int main()
 {
 	ll ncases;
