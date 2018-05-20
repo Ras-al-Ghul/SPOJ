@@ -1,3 +1,4 @@
+// node numbering starts from 1
 // adjacency list used, hence no duplicates in input
 
 // lot of learning - both algo and C++

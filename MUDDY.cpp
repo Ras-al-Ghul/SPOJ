@@ -1,22 +1,38 @@
 // node numbering starts from 1
 
-// maximum bipartite matching - BPM - solved after reduction to maxflow
-// can also solve using Hopcroft Karp algorithm, which is a faster than
-// 'max flow' method to find maximum matchings in bipartite graphs
-// <https://www.geeksforgeeks.org/hopcroft-karp-algorithm-for-maximum-matching-set-1-introduction/>
-// Konig's theorem
-// <https://en.wikipedia.org/wiki/K%C5%91nig%27s_theorem_(graph_theory)>
-// (min) minimum vertex cover in bipartite graph
-// = maximum bipartite matching
-// = can be reduced to max flow
-// <https://www.geeksforgeeks.org/maximum-bipartite-matching/>
-// all trees are bipartite graphs
+// remember the theory that there's a reduction from min vertex cover
+// to max flow from Konig's theorem in Bipartite graphs
+// if you have something that looks like min vertex cover/min set cover,
+// try to look out for this - i.e. problem statements like minimum 
+// number of edges/boards/whatever given a graph/2D grid 
+// then look at how given graph can be converted to Bipartite graph whose
+// minimum vertex cover helps solve the problem
+// instead of directly trying to apply maxflow
+
+// this problem didn't look like it can be done by dp, greedy might be possible
+// but didn't look to disprove that greedy was not possible
+// saw maxflow tag, came so far as to deduce maximal length vertical
+// and horizontal bars, but didn't know how to use that
+
+// then see min set cover problem, min number of subsets to form a set
+// but that's np complete, hence look at min vertex cover. But not on a generic graph,
+// but on a bipartite graph, since only then reduction to max flow is possible
+
+// if you see maximal vertical and horizontal length rods and play around, you'll
+// get the idea, given that we're trying to minimize the number of rods we need
+// to use - for each muddy spot, we'll either select a horizontal rod or a vertical
+// rod - since it's either, those are the two partitions of the graph
+// connect source to all vertical rods and sink to all horizontal rods
+// and find max flow - this will find min vertex cover - which in turn means
+// minimum number of vertices (horizontal or vertical rods) which cover all the
+// edges (edges are muddy spots here)
 
 #include <iostream>
 #include <climits>
 #include <vector>
 #include <list>
 #include <queue>
+#include <string>
 
 using namespace std;
 
@@ -141,43 +157,71 @@ public:
 };
 
 int main(){
-	int k;
-	scanf("%d", &k);
-	while(k--){
-		int p, t, s, c;
-		scanf("%d %d %d %d", &p, &t, &s, &c);
-		int personPosn[p+1][2];
-		for(int i=1; i<=p; ++i){
-			scanf("%d %d", &personPosn[i][0], &personPosn[i][1]);
+	int t; scanf("%d", &t);
+	while(t--){
+		int i, j, r, c, longest, nbars; scanf("%d %d", &r, &c);
+		string temp;
+		bool arr[r][c] = {};
+		for(i=0; i<r; ++i){
+			cin>>temp;
+			for(j=0; j<temp.length(); ++j)
+				arr[i][j] = temp[j]=='*'?1:0;
 		}
-		int taxiPosn[t+1][2];
-		for(int i=1; i<=t; ++i){
-			scanf("%d %d", &taxiPosn[i][0], &taxiPosn[i][1]);
-		}
-		long maxdist = long(c) * long(s);
-		// 1 is supersource because node numbering starts from 1
-		// hence cab numbers added by 1
-		// taxi numbers start after p+1 - i.e. from p+2
-		Graph graph(p+t+2); long dist;
-		for(int i=1; i<=p; ++i){
-			for(int j=1; j<=t; ++j){
-				dist = abs(long(personPosn[i][0])-long(taxiPosn[j][0]))
-					   + abs(long(personPosn[i][1])-long(taxiPosn[j][1]));
-				if((dist*200) <= maxdist){
-					graph.addEdge(i+1,j+p+1,1);
+
+		// stores which longest vertical[0] or horizontal[1] bar the
+		// muddy patch belongs to and (0,0) if not muddy patch
+		// nodes numbered from 0 to (r*c)-1 row wise
+		int mapping[r*c][2] = {};
+
+		// longest vertical bars
+		longest = 0;
+		for(j=0; j<c; ++j){
+			int temparr[r] = {};
+			for(i=0; i<r; ++i){
+				if(arr[i][j] == 1){
+					if(i>0 and temparr[i-1] != 0){
+						temparr[i] = temparr[i-1]; mapping[(i*c)+j][0] = temparr[i];
+					}
+					else{
+						++longest; temparr[i] = longest; mapping[(i*c)+j][0] = temparr[i];
+					}
 				}
 			}
 		}
-		// 1 is supersource
-		for(int i=1; i<=p; ++i){
-			graph.addEdge(1,i+1,1);
+		// to help with source and sink connections later
+		nbars = longest;
+		// longest horizontal bars
+		for(i=0; i<r; ++i){
+			int temparr[c] = {};
+			for(j=0; j<c; ++j){
+				if(arr[i][j] == 1){
+					if(j>0 and temparr[j-1] != 0){
+						temparr[j] = temparr[j-1]; mapping[(i*c)+j][1] = temparr[j];
+					}
+					else{
+						++longest; temparr[j] = longest; mapping[(i*c)+j][1] = temparr[j];
+					}
+				}
+			}
 		}
+
+		// create graph and connect each muddy patch to respective nodes
+		// nodes are longest horizontal bars or longest vertical bars
+		// bipartite graph
+		Graph graph(longest+2);
+		// supersource
 		graph.setSource(1);
-		// p+t+2 is supersink
-		for(int i=1; i<=t; ++i){
-			graph.addEdge(i+p+1,p+t+2,1);
-		}
-		graph.setSink(p+t+2);
+		for(i=0; i<(r*c); ++i)
+			if(mapping[i][0] != 0)
+				// add edge from vertical bar to horizontal bar for that muddy patch
+				graph.addEdge(mapping[i][0]+1,mapping[i][1]+1,1);
+		// supersink
+		graph.setSink(longest+2);
+		for(i=1; i<=nbars; ++i)
+			graph.addEdge(1,i+1,1);
+		for(i=nbars+1; i<=longest; ++i)
+			graph.addEdge(i+1,longest+2,1);
+
 		printf("%d\n", graph.maximumFlow());
 	}
 	return 0;
