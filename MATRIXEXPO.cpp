@@ -20,8 +20,8 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 
-ll mult(ll a,ll b, ll p=MOD){ll ans = ((a%p)*(b%p))%p; return (ans+p)%p;}
-ll add(ll a, ll b, ll p=MOD){ll ans = (a%p + b%p)%p; return (ans+p)%p;}
+ll mult(ll a,ll b, ll p=MOD){ll ans = a; ans *= b; return ((ans >= p) ? ans % p : ans);}
+ll add(ll a, ll b, ll p=MOD){ll ans = a + b; return ((ans >= p) ? ans - p : ans);}
 ll fpow(ll n, ll k, ll p = MOD) {ll r = 1; for (; k; k >>= 1) {if (k & 1) r = r * n%p; n = n * n%p;} return r;}
 ll inv(ll a, ll p = MOD) {return fpow(a, p - 2, p);}
 
