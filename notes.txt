@@ -324,3 +324,4 @@ PRINCIPLE OF INCLUSION EXCLUSION: kick3.cpp
 MATRIX EXPONENTIATION: MATRIXEXPO.cpp
 LAZY SEGMENT TREE: lazy_segment_tree.cpp
 ZARRAY to find substring: for each i in 0<=i<n where n is size of string s, Z array technique will find length of longest substring starting from i which is also prefix of s in linear time - to use as substring match - if you want to find t, do Z array algo on t$s and if you find value of |t| in Z array, it means you've found t at that index. z_array.cpp
+MAXFLOW: MAXFLOW.cpp - fast maxflow - works when edges are only added (not removed) - can be used to find maximum matching
